@@ -1,6 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
 
-
 db = SQLAlchemy()
 
 class User(db.Model):
@@ -85,5 +84,6 @@ class Comment(db.Model):
             # do not serialize the password, its a security breach
         }
     
+
     
     

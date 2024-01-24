@@ -54,7 +54,6 @@ def getComments(post_id):
     post = Post.query.filter_by(id=post_id)
     singlePost = list(map(lambda x: x.serialize(), post))
     
-
     comments = Comment.query.filter_by(post_id=post_id)
     allComments = list(map(lambda x: x.serialize(), comments))
 
@@ -88,6 +87,66 @@ def createUser():
     
     response_body ={
         "msg": "User successfully added"
+    }
+
+    return jsonify(response_body), 200
+
+@api.route('/createpost', methods=['POST'])
+@jwt_required()
+def createPost():
+    current_user_id = get_jwt_identity() 
+
+    # try:
+    place_name = request.form.get("place_name")
+    stay = request.form.get("stay")
+    activities = request.form.get("activities")
+    transportation = request.form.get("transportation")
+    tips = request.form.get("tips")
+    social_media=request.files.get('social_media')
+    
+    imgbb_response = uploadMediaToImgBB(social_media)
+
+    # Save URL in the db
+    post = Post(
+        user_id=current_user_id,
+        place_name=place_name,
+        stay=stay,
+        activities=activities,
+        transportation=transportation,
+        tips=tips,
+        social_media=imgbb_response.get('url')  
+    )
+
+    db.session.add(post)
+    db.session.commit()
+
+    response_body = {
+        "msg": "Post successfully added",
+        "post_id": post.id  
+    }
+
+    return jsonify(response_body), 201 
+
+def uploadMediaToImgBB(social_media):
+    # Upload media to ImgBB and get the URL
+    imgbb_url = "https://api.imgbb.com/1/upload?key=a4164c53da6c55c20d8544a12de89add"
+    imgbb_response = requests.post(imgbb_url, files={'image': social_media})
+    return imgbb_response.json().get('data')
+
+@api.route('/createcomment', methods=['POST'])
+@jwt_required()
+def createComment():
+    user_id = get_jwt_identity()
+    post_id = request.json.get("post_id")
+    comment = request.json.get("comment")
+
+    comment = Comment(user_id = user_id, post_id = post_id, comment = comment)
+
+    db.session.add(comment)
+    db.session.commit()
+
+    response_body = {
+        "msg": "Comment successfully added "
     }
 
     return jsonify(response_body), 200
