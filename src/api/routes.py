@@ -150,3 +150,41 @@ def createComment():
     }
 
     return jsonify(response_body), 200
+
+#signUp
+@api.route('/signup', methods=['POST'])
+def createUser():
+    first_name = request.json.get("first_name")
+    last_name = request.json.get("last_name")
+    password = request.json.get("password")
+    email = request.json.get("email")
+
+    user = User.query.filter_by(email=email).first()
+    if user != None:
+        return jsonify({"msg": "email exists"}), 401
+    
+    user = User(first_name=first_name, last_name=last_name ,password=password, email = email)
+    db.session.add(user)
+    db.session.commit()
+    
+    response_body = {
+        "msg": "User successfully added"
+    }
+
+    return jsonify(response_body), 200
+
+
+#login
+@api.route('/token', methods=['POST'])
+def create_token():
+    email = request.json.get("email")
+    password = request.json.get("password")
+    
+    user = User.query.filter_by(email=email, password=password).first()
+    if user is None:
+        
+        return jsonify({"msg": "Bad email or password"}), 401
+    
+  
+    access_token = create_access_token(identity=user.id)
+    return jsonify({ "token": access_token, "user_id": user.id }) ,200

@@ -1,27 +1,44 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-// const myStyle = {
-// 	'background-color':'#e3f2fd'
-// }
+import { useNavigate } from "react-router-dom";
+import { Context } from "../store/appContext";
+import { useContext} from "react";
+//import  "../component/styles.css";
 
+// "Link" paths just written are just for reference, should be changed later
 export const Navbar = () => {
+    const navigate = useNavigate();
+	const { store, actions } = useContext(Context);
 	return (
-		<nav className="navbar navbar-light bg-light">
-			<div className="container">
-				<Link to="/">
-					<span className="navbar-brand mb-0 h1">What to do</span>
-				</Link>
-				<div className="ml-auto">
-					{/* crea un enlace al Sing up y al Log in */}
-					<Link to="/log-in">
-						<button className="btn btn-light me-1">Log in</button>
-					</Link>
-					<Link to="/demo">
-						<button className="btn btn-primary">Sing up</button>
-					</Link>
-
-				</div>
+		<nav className="navbar navbar-light bg-light border-bottom">
+			<div className="container-fluid">
+                        <Link to="/">
+                           <h3>What to Do</h3>
+                        </Link>
+                        {!store.token ? 
+                    <div className="ml-auto">
+                        <Link to="/login">
+                            <button className="btn btn-primary me-1">Login</button>
+                        </Link>
+                        <Link to="/signup">
+                            <button className="btn btn-primary">Signup</button>
+                        </Link>
+                    </div>
+                    :
+                        <>
+                        {/* <div className="ml-auto">
+                        <Link to="/search">
+                            <span>Search</span>
+                        </Link>
+                        </div> */}
+                    <div className="ml-auto">
+                        <Link to="/">
+                            <button className="btn btn-outline-danger" onClick={() => actions.logout(navigate)}>Logout</button>
+                        </Link>
+                    </div>
+                    </>
+                }				
 			</div>
 		</nav>
 	);
