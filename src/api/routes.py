@@ -71,25 +71,6 @@ def getComments(post_id):
 
     return jsonify(singlePost), 200
 
-# @api.route('/signup', methods=['POST'])
-# def createUser():
-#     first_name = request.json.get('first_name')
-#     last_name = request.json.get('last_name')
-#     password = request.json.get('password')
-#     email = request.json.get('email')
-
-#     user = User.query.filter_by(email=email).first()
-#     if user != None:
-#         return jsonify({"msg": "email exist"}), 401
-#     user= User(first_name=first_name, last_name=last_name, password=password, email=email)
-#     db.session.add(user)
-#     db.session.commit()
-    
-#     response_body ={
-#         "msg": "User successfully added"
-#     }
-
-#     return jsonify(response_body), 200
 
 @api.route('/createpost', methods=['POST'])
 @jwt_required()
@@ -140,7 +121,11 @@ def createComment():
     post_id = request.json.get("post_id")
     comment = request.json.get("comment")
 
-    comment = Comment(user_id = user_id, post_id = post_id, comment = comment)
+    comment = Comment(
+        user_id = user_id, 
+        post_id = post_id, 
+        comment = comment
+        )
 
     db.session.add(comment)
     db.session.commit()
@@ -154,24 +139,32 @@ def createComment():
 #signUp
 @api.route('/signup', methods=['POST'])
 def createUser():
-    first_name = request.json.get("first_name")
-    last_name = request.json.get("last_name")
-    password = request.json.get("password")
-    email = request.json.get("email")
+    request_body = request.get_json()
 
-    user = User.query.filter_by(email=email).first()
-    if user != None:
-        return jsonify({"msg": "email exists"}), 401
+    users = User(
+        first_name = request.json.get("first_name"),
+        last_name = request.json.get("last_name"),
+        password = request.json.get("password"),
+        email = request.json.get("email")
+        )
     
-    user = User(first_name=first_name, last_name=last_name ,password=password, email = email)
-    db.session.add(user)
+    # user = User.query.filter_by(email=email).first()
+    # if user != None:
+    #     return jsonify({"msg": "email exists"}), 401
+    
+    # user = User(first_name=first_name, last_name=last_name ,password=password, email = email)
+    email = request.json.get('email', None)
+    access_token = create_access_token(identity = email)
+    
+
+    db.session.add(users)
     db.session.commit()
     
     response_body = {
         "msg": "User successfully added"
     }
 
-    return jsonify(response_body), 200
+    return jsonify(request_body, access_token), 200
 
 
 #login

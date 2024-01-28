@@ -3,7 +3,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 				token: null,
-				user: null,
+				user: [],
 				users: [],
 				loggedInAs: [],
 		},
@@ -59,7 +59,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 							"first_name": form.first_name,
 							"last_name": form.last_name,					
 							"email": form.email,
-							  "password": form.password,
+							"password": form.password,
 						})					
 					})
 					.then(async resp => {
@@ -72,6 +72,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 						await resp.json(); // (returns promise) will try to parse the result as json as return a promise that you can .then for results
 						navigate('/login');														
 					})
+					const data = await resp.json();
+					console.log(data[0])
+					sessionStorage.setItem('token', data[1])
+
+					setStore({ users: data[0] })
+					setStore({ token: data[1] })
+					
 					.catch(error => {
 						//error handling
 						console.log(error);

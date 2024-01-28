@@ -3,6 +3,7 @@ import { Context } from "../store/appContext";
 import rigoImageUrl from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
 import { Carousel } from "../component/carrusel";
+import { Location } from "../component/geolocation"; 
 
 //Back ground style for activities
 const myStyle = {
@@ -22,7 +23,8 @@ export const Home = () => {
 						Here should be long paragraph to describe why you should use this and how amazing we are 
 					</p>
 					<p> 
-						Your current location is : SET location				
+						Your current location is : 	
+							<Location/>		
 					</p>
 					<button type="button" 
 					class="btn btn-outline-success btn-sm"
