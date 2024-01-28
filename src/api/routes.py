@@ -1,6 +1,7 @@
 """
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
+import hashlib
 from flask import Flask, request, jsonify, url_for, Blueprint
 from api.models import db, User, Post, Comment
 from api.utils import generate_sitemap, APIException
@@ -141,10 +142,16 @@ def createComment():
 def createUser():
     request_body = request.get_json()
 
+    salt = os.getenv("SALT")
+    password = request.json.get("password") + salt
+    hashKey = hashlib.sha256()
+    hashKey.update(password.encode())
+    password = hashKey.hexdigest()
+
     users = User(
         first_name = request.json.get("first_name"),
         last_name = request.json.get("last_name"),
-        password = request.json.get("password"),
+        password = password,
         email = request.json.get("email")
         )
     
@@ -153,6 +160,7 @@ def createUser():
     #     return jsonify({"msg": "email exists"}), 401
     
     # user = User(first_name=first_name, last_name=last_name ,password=password, email = email)
+
     email = request.json.get('email', None)
     access_token = create_access_token(identity = email)
     
@@ -171,7 +179,12 @@ def createUser():
 @api.route('/token', methods=['POST'])
 def create_token():
     email = request.json.get("email")
-    password = request.json.get("password")
+
+    salt = os.getenv("SALT")
+    password = request.json.get("password") + salt
+    hashKey = hashlib.sha256()
+    hashKey.update(password.encode())
+    password = hashKey.hexdigest()
     
     user = User.query.filter_by(email=email, password=password).first()
     if user is None:
