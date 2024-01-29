@@ -59,7 +59,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 							"first_name": form.first_name,
 							"last_name": form.last_name,					
 							"email": form.email,
-							  "password": form.password,
+							"password": form.password,
 						})					
 					})
 					.then(async resp => {
