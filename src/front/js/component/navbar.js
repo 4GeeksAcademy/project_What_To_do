@@ -26,7 +26,7 @@ export const Navbar = () => {
 
 		<nav className="navbar navbar-light bg-light border-bottom">
 			<div className="container-fluid">
-                    <div>
+                    <div className="d-flex">
                     <Link to="/">
                            <h3>What to Do</h3>
                         </Link>

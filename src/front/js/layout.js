@@ -15,6 +15,9 @@ import { Footer } from "./component/footer";
 import Signup from "./pages/Signup.jsx";
 import Login from "./pages/Login.jsx";
 import Profile from "./pages/Profile.jsx";
+import ForgotPassword from "./pages/ForgotPassword.jsx";
+import ResetPassword from "./pages/ResetPassword.jsx";
+import ValidateResetPassword from "./pages/ValidateResetPassword.jsx";
 
 //create your first component
 const Layout = () => {
@@ -35,6 +38,9 @@ const Layout = () => {
                         <Route element={<Signup />} path="/signup" />
                         <Route element={<Login />} path="/login" />
                         <Route element={<Profile />} path="/profile" />
+                        <Route element={<ForgotPassword />} path="/forgotpassword" />
+                        <Route element={<ResetPassword />} path="/resetpassword" />
+                        <Route element={<ValidateResetPassword />} path="/validateresetpassword/:token" /> 
                         <Route element={<Single />} path="/single/:theid" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
