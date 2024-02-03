@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 
 const API_endpoint = `https://api.openweathermap.org/data/2.5/weather?`;
-const API_key = `da0439bd70676a29ec02d776f153f295`;
+const API_key = `da0439bd70676a29ec02d776f153f295`
+
+//  https://api.foursquare.com/v3/places/search
 
 export const Location = () => {
   const [latitude, setLatitude] = useState('');

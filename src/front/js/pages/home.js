@@ -4,6 +4,8 @@ import rigoImageUrl from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
 import { Carousel } from "../component/carrusel";
 import { Location } from "../component/geolocation"; 
+import { SearchPOI } from "../component/SearchPoi"
+// import SearchBar from "../component/SearchBar"
 
 //Back ground style for activities
 const myStyle = {
@@ -24,7 +26,9 @@ export const Home = () => {
 					</p>
 					<p> 
 						Your current location is : 	
-							<Location/>		
+							<Location/>	
+							<SearchPOI/>
+							{/* <SearchBar/> */}
 					</p>
 					<button type="button" 
 					class="btn btn-outline-success btn-sm"
