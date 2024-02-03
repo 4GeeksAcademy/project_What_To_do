@@ -4,8 +4,8 @@ import axios from 'axios';
 const API_URL = `https://api.foursquare.com/v3/places/search`;
 const API_KEY = `fsq36n4VDirwVjuExOsAhVU+3oLweispAYAg5bmsTeT9gUg=`;
 
-export const SearchPOI = () => {
-  const [responseData, setResponseData] = useState({});
+export const SearchPOI = ({responseData, setResponseData}) => {
+  
   const [latlong, setLatlong] = useState('');
   useEffect(() => {
     // Define the function inside the effect
@@ -37,12 +37,17 @@ export const SearchPOI = () => {
     .then(response => {
       const { data } = response;
       if (data && data.results && data.results.length > 0) {
-        const place = data.results[0];
-        setResponseData({
+        const places = data.results;
+        setResponseData(
+          places.map((place) => { 
+          return {
           name: place.name,
           address: place.location.formatted_address,
+          id: place.fsq_id,
           category: place.categories.length > 0 ? place.categories[0].name : "Unknown Category"
-        });
+          }})
+          
+        );
       } else {
         console.warn('No place found');
       }
@@ -51,18 +56,19 @@ export const SearchPOI = () => {
       console.error('Error fetching place data:', error);
     });
   };
+  console.log(responseData)
+
   // Example usage (you might want to call this function based on user input or another event)
   useEffect(() => {
     if (latlong) { // Ensure we have the latlong before attempting to fetch venues
-      getVenues('art gallery'); // Replace 'coffee' with your desired query
+      getVenues('coffee'); // Replace 'coffee' with your desired query
     }
   }, [latlong]); // This effect depends on latlong
   return (
-    
-    <div>
-    <h2>Name: {responseData.name}</h2>
-    <p>Address: {responseData.address}</p>
-    <p>Category: {responseData.category}</p>
-  </div>
+    <>
+    {responseData.name}
+    {responseData.address}
+    {responseData.category}
+    </>
   );
 };

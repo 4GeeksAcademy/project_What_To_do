@@ -1,10 +1,12 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
+import { useState } from "react";
 import rigoImageUrl from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
 import { Carousel } from "../component/carrusel";
 import { Location } from "../component/geolocation"; 
 import { SearchPOI } from "../component/SearchPoi"
+
 // import SearchBar from "../component/SearchBar"
 
 //Back ground style for activities
@@ -14,6 +16,7 @@ const myStyle = {
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
+	const [responseData, setResponseData] = useState([]);
 
 	return (
 		<div>
@@ -27,7 +30,7 @@ export const Home = () => {
 					<p> 
 						Your current location is : 	
 							<Location/>	
-							<SearchPOI/>
+							<SearchPOI responseData = {responseData} setResponseData={setResponseData}/>
 							{/* <SearchBar/> */}
 					</p>
 					<button type="button" 
@@ -45,48 +48,24 @@ export const Home = () => {
 				<form className="d-flex mb-2" role="search">
 					<input 
 						class="form-control me-2" 
-						type="search" 
+						type="search"
 						placeholder="Search an activity" 
 						aria-label="Search"
 					/>
 					<button class="btn btn-outline-success" type="submit">Search</button>
 				</form>
 			<ol className="list-group list-group-numbered">
+				{responseData.map(result =>
+
 				<li className="list-group-item d-flex justify-content-between align-items-start">
 					<div className="ms-2 me-auto">
-					<div className="fw-bold">Activity 1</div>
-					Description
+					<div className="fw-bold">{result.name}</div>
+					{result.address}
 					</div>
-					<span className="badge bg-primary rounded-pill">14</span>
+					<span className="badge bg-primary rounded-pill">{result.category}</span>
 				</li>
-				<li className="list-group-item d-flex justify-content-between align-items-start">
-					<div className="ms-2 me-auto">
-					<div className="fw-bold">Activity 2</div>
-					Description
-					</div>
-					<span className="badge bg-primary rounded-pill">14</span>
-				</li>
-				<li className="list-group-item d-flex justify-content-between align-items-start">
-					<div className="ms-2 me-auto">
-					<div className="fw-bold">Activity 3</div>
-					Description
-					</div>
-					<span className="badge bg-primary rounded-pill">14</span>
-				</li>
-				<li className="list-group-item d-flex justify-content-between align-items-start">
-					<div className="ms-2 me-auto">
-					<div className="fw-bold">Activity 4</div>
-					Description
-					</div>
-					<span className="badge bg-primary rounded-pill">14</span>
-				</li>
-				<li className="list-group-item d-flex justify-content-between align-items-start">
-					<div className="ms-2 me-auto">
-					<div className="fw-bold">Activity 5</div>
-					Description
-					</div>
-					<span className="badge bg-primary rounded-pill">14</span>
-				</li>
+					
+				)}
 			</ol>
 			</div>
 		</div>
