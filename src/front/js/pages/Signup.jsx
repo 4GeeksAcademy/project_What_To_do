@@ -1,6 +1,7 @@
 import React, {useContext, useState} from "react";
 import { Context } from "../store/appContext";
 import {useNavigate } from "react-router-dom";
+import "../../styles/home.css";
 
 const Signup = () => {    
     const { store, actions } = useContext(Context);
@@ -15,6 +16,10 @@ const Signup = () => {
     }
     return(
         <div className="container signup-container mt-5">
+        <div>
+          <http><img className="SignupImg" src="https://thumbs.dreamstime.com/b/ready-summer-vacation-travel-background-d-rendering-114574299.jpg"/></http>
+        </div>
+
         <form className="row g-3 border border-lightgray bg-light">
           <div className="py-2 bg-light border-bottom border-lightgray mt-0 text-center">
             <h2>SignUp</h2>

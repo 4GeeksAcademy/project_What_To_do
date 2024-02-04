@@ -2,6 +2,8 @@ import React, { useEffect, useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
 import  "../component/styles.css";
+import { Carousel } from "../component/carrusel";
+
 
 
 const Profile = () => {
@@ -24,13 +26,9 @@ const Profile = () => {
                 Your Location Name: Miami
             </h2>
         
-            {
-            <div>
-                <div  style="width: 18">
-                                
-                                
-                            </div>
-                {/* <div className="carousel slide">
+            
+            {/* <div>
+                <div className="carousel slide">
                     <div className="carousel-inner">
                         <div className="carousel-item active">
                             <div className="card" style="width: 18rem;">
@@ -69,9 +67,8 @@ const Profile = () => {
                         <span className="carousel-control-next-icon" aria-hidden="true"></span>
                         <span className="visually-hidden">Next</span>
                     </button>
-                </div> */}
-            </div> 
-            }
+                </div> 
+            </div> */}
             
         </div>
     );

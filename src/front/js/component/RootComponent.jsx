@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import ForgotPassword from './ForgotPassword';
 import ResetPassword from './ResetPassword'; 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import "../../styles/home.css";
 
 const RootComponent = () => {
   return (

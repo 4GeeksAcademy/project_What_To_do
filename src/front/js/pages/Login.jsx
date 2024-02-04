@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
+import "../../styles/home.css";
 
 const Login = () => {
   const { store, actions } = useContext(Context);
@@ -15,7 +16,9 @@ const Login = () => {
 
   return (
     <div className="container login-container mt-5" >
-      <div></div>
+      <div>
+        <http><img className="loginImg" src="https://wallpapers.com/images/hd/free-travel-wallpaper-1080p-6wuqvdkljh7mz54r.jpg"/></http>
+      </div>
       <form className="row g-3 border border-lightgray bg-light">
         <div className="py-2 bg-light border-bottom border-lightgray mt-0 text-center">
           <h2>Login</h2>
