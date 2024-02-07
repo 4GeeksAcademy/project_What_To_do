@@ -9,9 +9,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
-			exampleFunction: () => {
-				getActions().changeColor(0, "green");
-			},
+			// exampleFunction: () => {
+			// 	getActions().changeColor(0, "green");
+			// },
 
 			//GET USERS
 			getUsers: async () => {
@@ -59,7 +59,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 							"first_name": form.first_name,
 							"last_name": form.last_name,					
 							"email": form.email,
-							  "password": form.password,
+							"password": form.password,
 						})					
 					})
 					.then(async resp => {
@@ -166,6 +166,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			    if (token && token!= null && token!=undefined) setStore({token: token});
 		},
 
+
+		//This is not part of the project
 		getMessage: async () => {
 				try{
 					// fetching data from the backend

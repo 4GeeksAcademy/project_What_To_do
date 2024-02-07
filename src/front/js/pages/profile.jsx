@@ -1,16 +1,32 @@
-import React from "react";
+import React, { useContext , useEffect, useState } from "react";
+import { Context } from "../store/appContext";
+import { useNavigate } from "react-router-dom";
+
 
 const Profile = () => {
+    const { store, actions } = useContext(Context);
+    const navigate = useNavigate();
+
+
+    useEffect(() => {
+        function authenticate() {
+            actions.authenticateUser(navigate);
+        }
+        setTimeout(() => {
+            authenticate()
+        }, 500)
+    }, [])
 
     return (
         <div>
+             {store.user != null ?
             <div className="container fluid">
                 <div className="row">
                     <div class="card col-3">
                         <img src="https://www.pngkey.com/png/full/73-730477_first-name-profile-image-placeholder-png.png" class="card-img-top" alt="..."/>
                         <div class="card-body">
                             <h5 class="card-title">Nombre de Usuario</h5>
-                            <p class="card-text">Bio description</p>
+                            <p class="card-text">Favorite activities</p>
                         </div>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">An item</li>
@@ -56,35 +72,33 @@ const Profile = () => {
                                 <h1>Bio Graph</h1>
                                 <div class="row">
                                     <div class="bio-row">
-                                        <p><span>First Name </span>: Camila</p>
+                                        <p><span>First Name </span>: First name</p>
                                     </div>
                                     <div class="bio-row">
-                                        <p><span>Last Name </span>: Smith</p>
+                                        <p><span>Last Name </span>: Last name</p>
                                     </div>
                                     <div class="bio-row">
-                                        <p><span>Country </span>: Australia</p>
+                                        <p><span>Permanent location </span>: Location</p>
                                     </div>
                                     <div class="bio-row">
-                                        <p><span>Birthday</span>: 13 July 1983</p>
+                                        <p><span>Places visited </span>: Places</p>
                                     </div>
                                     <div class="bio-row">
-                                        <p><span>Occupation </span>: UI Designer</p>
+                                        <p><span>Places I'd like to visit </span>: wish list places</p>
                                     </div>
                                     <div class="bio-row">
-                                        <p><span>Email </span>: jsmith@flatlab.com</p>
+                                        <p><span>Activities I'd like to do </span>: Activities</p>
                                     </div>
-                                    <div class="bio-row">
-                                        <p><span>Mobile </span>: (12) 03 4567890</p>
-                                    </div>
-                                    <div class="bio-row">
-                                        <p><span>Phone </span>: 88 (02) 123456</p>
-                                    </div>
+
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+                   :
+                   "profile loading..."
+               }
         </div>
     )
 }
