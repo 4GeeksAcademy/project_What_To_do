@@ -6,15 +6,16 @@ import { useNavigate } from "react-router-dom";
 const Profile = () => {
     const { store, actions } = useContext(Context);
     const navigate = useNavigate();
-
+    let user = store.user
 
     useEffect(() => {
         function authenticate() {
             actions.authenticateUser(navigate);
         }
-        setTimeout(() => {
-            authenticate()
-        }, 500)
+        authenticate()
+        
+      
+        
     }, [])
 
     return (
@@ -25,7 +26,7 @@ const Profile = () => {
                     <div class="card col-3">
                         <img src="https://www.pngkey.com/png/full/73-730477_first-name-profile-image-placeholder-png.png" class="card-img-top" alt="..."/>
                         <div class="card-body">
-                            <h5 class="card-title">Nombre de Usuario</h5>
+                            <h5 class="card-title">{user.first_name} {user.last_name}</h5>
                             <p class="card-text">Favorite activities</p>
                         </div>
                         <ul class="list-group list-group-flush">

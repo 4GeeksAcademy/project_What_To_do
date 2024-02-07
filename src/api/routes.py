@@ -192,7 +192,8 @@ def create_token():
 @api.route("/private", methods=["GET"])
 @jwt_required()
 def protected():
-    current_user_id = get_jwt_identity()    
+    current_user_id = get_jwt_identity()
+    print(current_user_id)    
     user = User.query.get(current_user_id)
 
     if user == None:
@@ -200,3 +201,8 @@ def protected():
             "msg": "Please login to continue"
         }
         return jsonify(response_body)
+    response_body = {
+        "msg": "Success!", "user":user.serialize()
+    }
+    return jsonify(response_body),200
+    

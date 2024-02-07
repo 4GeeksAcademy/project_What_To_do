@@ -126,13 +126,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				//MEMBER AUTHENTIFICATION
 				authenticateUser: (navigate) => {
-					const store = getStore();
-					console.log(store.token);
+					
+					
 					const url = apiUrl+"/api/private"
 					fetch(url, {
 						method: "GET",
 						headers: {
-							"Authorization": "Bearer " + store.token
+							"Authorization": "Bearer " + sessionStorage.getItem("token")
 						}
 					})
 					.then(resp => {
@@ -145,11 +145,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 						}
 						
 						//console.log(resp.text()); // will try return the exact result as string
-						return resp.json();
+						return resp.json()
 					})
 					.then(data => {
-						setStore({user: data});
+						setStore({user: data.user});
 						console.log(data);
+						return true
 						
 					})
 					.catch(error => {
