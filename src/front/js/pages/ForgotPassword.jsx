@@ -16,7 +16,7 @@ import '../component/styles.css';
             headers: {
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ email }),
+            body: JSON.stringify({ email:email }),
           });
       
           console.log('Forgot Password Response:', response);
@@ -26,7 +26,7 @@ import '../component/styles.css';
             setAlertType('success');
             setTimeout(() => {
               navigate('/login');
-            }, 2000);
+            }, 200);
           } else {
             setAlertMessage('Failed to send reset link, please verify your email address is correct.');
             setAlertType('danger');

@@ -12,9 +12,9 @@ server = smtplib.SMTP("smtp.gmail.com", 587)
 
 def send_email(url:str, recipient_email):
 
-    EMAIL = os.getenv("EMAIL")
+    EMAIL =  os.getenv("EMAIL")
     GMAIL_PASSWD = os.getenv("GMAIL_PASSWD")
-
+   
 
     msg = MIMEMultipart('alternative')
     msg['Subject'] = f"<ALERT> Item has become available: {recipient_email}"
