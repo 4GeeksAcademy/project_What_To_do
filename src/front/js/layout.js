@@ -14,6 +14,7 @@ import { Footer } from "./component/footer";
 //Additions
 import Signup from "./pages/Signup.jsx";
 import Login from "./pages/Login.jsx";
+import { Activity } from "./pages/Activity.js";
 
 //create your first component
 const Layout = () => {
@@ -34,7 +35,9 @@ const Layout = () => {
                         <Route element={<Signup />} path="/signup" />
                         <Route element={<Login />} path="/login" />
                         <Route element={<Single />} path="/single/:theid" />
+                        <Route element={<Activity />} path="/activity/:id" />
                         <Route element={<h1>Not found!</h1>} />
+
                     </Routes>
                     <Footer />
                 </ScrollToTop>

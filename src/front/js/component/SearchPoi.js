@@ -4,11 +4,11 @@ import axios from 'axios';
 const API_URL = `https://api.foursquare.com/v3/places/search`;
 const API_KEY = `fsq36n4VDirwVjuExOsAhVU+3oLweispAYAg5bmsTeT9gUg=`;
 
-export const SearchPOI = ({responseData, setResponseData}) => {
-  
+
+export const SearchPOI = ({ responseData, setResponseData, searchInput, clickSearch, setClickSearch }) => {
   const [latlong, setLatlong] = useState('');
+
   useEffect(() => {
-    // Define the function inside the effect
     const getLocation = () => {
       navigator.geolocation.getCurrentPosition(
         (response) => {
@@ -20,8 +20,9 @@ export const SearchPOI = ({responseData, setResponseData}) => {
       );
     };
     getLocation();
-  }, []); // The empty array means this effect runs only once after the initial render
-  
+  }, []);
+
+
   const getVenues = (query) => {
     const endPoint = `${API_URL}?`;
     const params = {
@@ -41,29 +42,45 @@ export const SearchPOI = ({responseData, setResponseData}) => {
         setResponseData(
           places.map((place) => { 
           return {
-          name: place.name,
-          address: place.location.formatted_address,
-          id: place.fsq_id,
-          category: place.categories.length > 0 ? place.categories[0].name : "Unknown Category"
+
+            name: place.name,
+            address: place.location.formatted_address,
+            id: place.fsq_id,
+            category: place.categories.length > 0 ? place.categories[0].name : "Unknown Category"
+            // description = 
           }})
-          
         );
       } else {
         console.warn('No place found');
+        setResponseData([]); // Clear previous data if no places found
       }
+      
     })
     .catch(error => {
       console.error('Error fetching place data:', error);
     });
   };
+
   console.log(responseData)
 
-  // Example usage (you might want to call this function based on user input or another event)
   useEffect(() => {
-    if (latlong) { // Ensure we have the latlong before attempting to fetch venues
-      getVenues('coffee'); // Replace 'coffee' with your desired query
+    if(latlong && !clickSearch) {
+      getVenues('coffee')
     }
-  }, [latlong]); // This effect depends on latlong
+  },[latlong]);
+
+  useEffect(() => {
+    if (latlong && clickSearch) {
+      getVenues(searchInput); // Fetch venues based on current location when latlong changes
+      setClickSearch(false);
+    }
+  }, [latlong, clickSearch]);
+
+  // const handleChange = (value) => {
+  //   setSearchValue(value);
+  //   getVenues(value); // Fetch venues based on new input value
+  // };
+
   return (
     <>
     {responseData.name}
