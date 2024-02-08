@@ -193,6 +193,25 @@ def create_token():
     return jsonify({ "token": access_token, "user_id": user.id }) ,200
 
 
+@api.route("/private", methods=["GET"])
+@jwt_required()
+def protected():
+    current_user_id = get_jwt_identity()
+    print(current_user_id)    
+    user = User.query.get(current_user_id)
+
+    if user == None:
+        response_body = {
+            "msg": "Please login to continue"
+        }
+        return jsonify(response_body)
+    response_body = {
+        "msg": "Success!", "user":user.serialize()
+    }
+    return jsonify(response_body),200
+    
+
+
 
 
 
@@ -367,3 +386,4 @@ def send_link():
     send_email(f"https://automatic-zebra-66qj6qjrxr4frqqg-3000.app.github.dev/validateresetpassword/{token}", email)
 
     return jsonify(email), 200
+

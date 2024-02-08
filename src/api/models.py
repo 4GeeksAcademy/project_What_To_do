@@ -10,6 +10,7 @@ class User(db.Model):
     last_name = db.Column(db.String(80), unique=False)
     perm_location = db.Column(db.String(80), unique=False)
     places_visited = db.Column(db.ARRAY(db.String()), unique=False)
+    wishlist_places = db.Column(db.ARRAY(db.String()), unique=False)
     reset_token = db.Column(db.String(200))
 
     post = db.relationship( "Post",  back_populates="user")

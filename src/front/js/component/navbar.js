@@ -30,8 +30,9 @@ export const Navbar = () => {
                     <Link to="/">
                            <h3>What to Do</h3>
                         </Link>
-                    </div>
-                        {!store.token ? 
+
+                        {!sessionStorage.getItem("token")? 
+
                     <div className="ml-auto">
                         <Link to="/login">
                             <button className="btn btn-primary me-1">Login</button>

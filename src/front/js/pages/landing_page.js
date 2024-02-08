@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
-import rigoImageUrl from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
 import { Carousel } from "../component/carrusel";
 
@@ -9,7 +8,7 @@ const myStyle = {
 	'background-color':'#e3f2fd'
 }
 
-export const Home = () => {
+export const LandingPage = () => {
 	const { store, actions } = useContext(Context);
 
 	return (
