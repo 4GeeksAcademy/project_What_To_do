@@ -8,6 +8,7 @@ class User(db.Model):
     password = db.Column(db.String(80), unique=False, nullable=False)
     first_name = db.Column(db.String(80), unique=False)
     last_name = db.Column(db.String(80), unique=False)
+    biography = db.Column(db.String(), unique=False)
     perm_location = db.Column(db.String(80), unique=False)
     places_visited = db.Column(db.ARRAY(db.String()), unique=False)
     wishlist_places = db.Column(db.ARRAY(db.String()), unique=False)
@@ -25,6 +26,7 @@ class User(db.Model):
             "email": self.email,
             "first_name": self.first_name,
             "last_name": self.last_name,
+            "biography" : self.biography,
             "permanent_location": self.perm_location,
             "places_visited": self.places_visited,
             "wishlist_places": self.wishlist_places,
@@ -39,7 +41,6 @@ class User(db.Model):
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
-    # user = db.relationship(User)
     place_name = db.Column(db.String(200))
     description = db.Column(db.String(200))
     
@@ -72,9 +73,7 @@ class Post(db.Model):
 class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    # user = db.relationship(User)
     post_id = db.Column(db.Integer, db.ForeignKey('post.id'))
-    # post = db.relationship(Post)
     comment = db.Column(db.Text)
     created_at = db.Column(db.Date)
 

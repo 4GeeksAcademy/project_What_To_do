@@ -12,7 +12,6 @@ export const Navbar = () => {
 	const { store, actions } = useContext(Context);
 	return (
 
-
         // <nav class="navbar bg-body-tertiary">
         //     <div class="container-fluid">
         //         <a class="navbar-brand">Navbar</a>
@@ -22,68 +21,77 @@ export const Navbar = () => {
         //         </form>
         //     </div>
 
-
-
 		<nav className="navbar navbar-light bg-light border-bottom">
 			<div className="container-fluid">
-                    <div className="d-flex">
+                <div className="d-flex">
                     <Link to="/">
                            <h3>What to Do</h3>
-                        </Link>
+                    </Link>
 
-                        {!sessionStorage.getItem("token")? 
+                    {!sessionStorage.getItem("token")? 
 
-                    <div className="ml-auto">
-                        <Link to="/login">
-                            <button className="btn btn-primary me-1">Login</button>
-                        </Link>
-                        <Link to="/signup">
-                            <button className="btn btn-primary">Signup</button>
-                        </Link>
-                    </div>
+                        <div className="ml-auto">
+                            <Link to="/login">
+                                <button className="btn btn-primary me-1">Login</button>
+                            </Link>
+                            <Link to="/signup">
+                                <button className="btn btn-primary">Signup</button>
+                            </Link>
+                        </div>
                     :
-                        <>
-                        {/* <div className="ml-auto">
-                        <Link to="/search">
-                            <span>Search</span>
-                        </Link>
-                        </div> */}
-                    <div class="dropdown">
-                        <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            What to Do!!
-                        </button>
-                    <ul class="dropdown-menu">
-                        <ol> 
+                        <div>
+                            {/* <div className="ml-auto">
+                            <Link to="/search">
+                                <span>Search</span>
+                            </Link>
+                            </div> */}
+                            <div class="dropdown">
+                                <button 
+                                    class="btn btn-primary dropdown-toggle" 
+                                    type="button" 
+                                    data-bs-toggle="dropdown" 
+                                    aria-expanded="false"
+                                >
+                                    What to Do!!
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <ol> 
+                                        <div className="ml-auto">
+                                            <Link to="/profile">
+                                                <span>My Profile</span>
+                                            </Link>
+                                        </div>
+                                    </ol>
+                                    <ol>
+                                        <div className="ml-auto">
+                                            <Link to="/myposts">
+                                                <span>My Posts</span>
+                                            </Link>
+                                        </div>
+                                    </ol>
+                                    <ol>
+                                        <div className="ml-auto">
+                                            <Link to="/newpost">
+                                                <span>New Post</span>
+                                            </Link>
+                                        </div>
+                                    </ol>
+                                </ul>
+                            </div>
                             <div className="ml-auto">
-                                <Link to="/profile">
-                                <span>My Profile</span>
+                                <Link to="/">
+                                    <button 
+                                        className="btn btn-outline-danger" 
+                                        onClick={() => actions.logout(navigate)}
+                                    >
+                                        Logout
+                                    </button>
                                 </Link>
                             </div>
-                        </ol>
-                        <ol>
-                            <div className="ml-auto">
-                                <Link to="/myposts">
-                                <span>My Posts</span>
-                                </Link>
-                            </div>
-                        </ol>
-                        <ol>
-                            <div className="ml-auto">
-                                <Link to="/newpost">
-                                <span>New Post</span>
-                                </Link>
-                            </div>
-                        </ol>
-                    </ul>
-                    </div>
-                    <div className="ml-auto">
-                        <Link to="/">
-                            <button className="btn btn-outline-danger" onClick={() => actions.logout(navigate)}>Logout</button>
-                        </Link>
-                    </div>
-                    </>
-                }				
-			</div>
+                        </div>
+                    }				
+			    </div>
+            </div>
 		</nav>
 	);
 };
