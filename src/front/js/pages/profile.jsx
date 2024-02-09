@@ -1,7 +1,7 @@
 import React, { useContext , useEffect, useState } from "react";
 import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
-
+import EditProfile from "../component/editProfile";
 
 const Profile = () => {
     const { store, actions } = useContext(Context);
@@ -47,13 +47,13 @@ const Profile = () => {
                             <div className="panel-body bio-graph-info">
                                 <h1>{user.first_name} {user.last_name}</h1>
                                 <div className="bio-graph-heading">
-                                {store.user?.biography ?? "Add a biography"}
+                                {user?.biography ?? "Add a biography"}
                                 </div>
                                 <div className="row py-3">
                                     <div className="row">
                                         <p>
-                                            <span><b>Permanent location :</b></span> 
-                                            {store.user?.permanent_location ?? "There is no location"}
+                                            <span><b>Current location :</b></span> 
+                                            {user?.permanent_location ?? "There is no location"}
                                         </p>
                                     </div>
                                     <div className="row">
@@ -70,13 +70,20 @@ const Profile = () => {
                                         </div>
                                         <div className="col">
                                             <p><b>Places I'd like to visit :</b></p>
-                                            <li>{store.user?.wishlist_places ?? "N/A"}</li>
+                                            <li>{user?.wishlist_places ?? "N/A"}</li>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <button type="button" class="btn btn-secondary">Edit Profile</button>
+                        <button 
+                            type="button" 
+                            class="btn btn-secondary"
+                            data-bs-toggle="modal" data-bs-target="#editProfileModal"
+                        >
+                            Edit Profile
+                        </button>
+                        <EditProfile user={user} />
                     </div>
                 </div>
             </div>

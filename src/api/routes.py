@@ -194,20 +194,28 @@ def protected():
 @jwt_required()
 def edit_user():
     current_user_id = get_jwt_identity()
-    user = User.query.get_or_404(current_user_id )
+    user = User.query.get(current_user_id)
 
-  
+    if user is None:
+        return jsonify({"msg":"user does not exist"}), 404
+
     # Update user fields based on the JSON data (assuming JSON payload)
     data = request.get_json()
-    user.first_name = data.get('first_name', user.first_name)
-    user.biography = data.get('biography', user.biography)
-    user.perm_location = data.get('perm_location', user.perm_location)
-    user.places_visited = data.get('places_visited', user.places_visited)
-    user.wishlist_places = data.get('wishlist_places', user.wishlist_places)
+    user.first_name = data.get('first_name')
+    user.last_name = data.get('last_name')
+    user.biography = data.get('biography')
+    user.perm_location = data.get('perm_location')
+    # user.places_visited = data.get('places_visited')
+    # user.wishlist_places = data.get('wishlist_places')
 
     # Update other fields as needed
     db.session.commit()
-    return {'message': 'User updated successfully'}, 200
+    user = User.query.get(current_user_id)
+    response_body = {
+        "msg": "Success!", "user":user.serialize()
+    }
+    return jsonify(response_body),200
+
 
 
 #forgot password
