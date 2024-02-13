@@ -4,10 +4,8 @@ import React, { useState, useEffect } from 'react';
 const API_URL = `https://api.foursquare.com/v3/places/search`;
 const API_KEY = `fsq36n4VDirwVjuExOsAhVU+3oLweispAYAg5bmsTeT9gUg=`;
 
-
 export const SearchPOI = ({ responseData, setResponseData, searchInput, clickSearch, setClickSearch }) => {
   const [latlong, setLatlong] = useState('');
-
   useEffect(() => {
     const getLocation = () => {
       navigator.geolocation.getCurrentPosition(
@@ -21,8 +19,6 @@ export const SearchPOI = ({ responseData, setResponseData, searchInput, clickSea
     };
     getLocation();
   }, []);
-
-
   const getVenues = async (query) => {
     const endPoint = `${API_URL}?`;
     const params = {
@@ -32,16 +28,13 @@ export const SearchPOI = ({ responseData, setResponseData, searchInput, clickSea
       query: query,
       v: "20182507"
     };
-  
     try {
       const response = await fetch(endPoint + new URLSearchParams(params), {
         headers: { 'Authorization': API_KEY }
       });
-  
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
-  
       const data = await response.json();
       if (data && data.results && data.results.length > 0) {
         const places = data.results;
@@ -50,8 +43,8 @@ export const SearchPOI = ({ responseData, setResponseData, searchInput, clickSea
             name: place.name,
             address: place.location.formatted_address,
             id: place.fsq_id,
+            description: place.description,
             category: place.categories.length > 0 ? place.categories[0].name : "Unknown Category"
-            // description = 
           }))
         );
       } else {
@@ -62,23 +55,18 @@ export const SearchPOI = ({ responseData, setResponseData, searchInput, clickSea
       console.error('Error fetching place data:', error);
     }
   };
-  
-
   console.log(responseData)
-
   useEffect(() => {
     if(latlong && !clickSearch) {
       getVenues('coffee')
     }
   },[latlong]);
-
   useEffect(() => {
     if (latlong && clickSearch) {
       getVenues(searchInput); // Fetch venues based on current location when latlong changes
       setClickSearch(false);
     }
   }, [latlong, clickSearch]);
-
   return (
     <>
     {responseData.name}

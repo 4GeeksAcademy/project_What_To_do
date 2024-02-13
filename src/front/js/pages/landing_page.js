@@ -16,7 +16,7 @@ export const LandingPage = () => {
 	const [responseData, setResponseData] = useState([]);
 	const [searchInput, setSearchInput] = useState('');
 	const [clickSearch, setClickSearch] = useState(false)
-	// const [newLocation, setNewLocation] = useState('');
+	// const [newLocation, setNewLocation] = useState('')
 
 	return (
 		<div>

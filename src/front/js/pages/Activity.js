@@ -7,10 +7,21 @@ const API_KEY = `fsq36n4VDirwVjuExOsAhVU+3oLweispAYAg5bmsTeT9gUg=`;
 export const Activity = () => {
     const [result, setResult] = useState({});
     const { id } = useParams();
-
+    
     return (
-        <h1>
+        
+        <div className="X">
+            
             {id}
+            
+        
+        <h1>
+            
         </h1>
+        <h3>
+            
+        </h3>
+
+        </div>
     )
 }
