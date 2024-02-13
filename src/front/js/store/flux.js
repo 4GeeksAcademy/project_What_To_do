@@ -239,6 +239,36 @@ const getState = ({ getStore, getActions, setStore }) => {
 			    if (token && token!= null && token!=undefined) setStore({token: token});
 		},
 
+		//Edit User
+		editUser: async (first_name,last_name,biography,perm_location) => {
+			let opt = {
+				method : "PUT",
+				headers : {
+					"Content-Type":"application/json",
+					"Authorization": "Bearer " + sessionStorage.getItem("token")
+				},
+				body : JSON.stringify({
+					"first_name" : first_name,
+					"last_name" : last_name,
+					"biography" : biography,
+					"perm_location" : perm_location
+				})
+			}
+			try {
+				let response = await fetch (process.env.BACKEND_URL + "/api/edit_user", opt)
+				if (response.status == 200) {
+					let data = await response.json()
+					setStore({ user : data.user })
+					return true
+				}
+				else {
+					return false
+				}
+			}
+			catch (error) {
+				console.log(error)
+			}
+		},
 
 		//This is not part of the project
 		getMessage: async () => {

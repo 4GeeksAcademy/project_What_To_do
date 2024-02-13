@@ -74,26 +74,6 @@ def getComments(post_id):
 
     return jsonify(singlePost), 200
 
-# @api.route('/signup', methods=['POST'])
-# def createUser():
-#     first_name = request.json.get('first_name')
-#     last_name = request.json.get('last_name')
-#     password = request.json.get('password')
-#     email = request.json.get('email')
-
-#     user = User.query.filter_by(email=email).first()
-#     if user != None:
-#         return jsonify({"msg": "email exist"}), 401
-#     user= User(first_name=first_name, last_name=last_name, password=password, email=email)
-#     db.session.add(user)
-#     db.session.commit()
-    
-#     response_body ={
-#         "msg": "User successfully added"
-#     }
-
-#     return jsonify(response_body), 200
-
 @api.route('/createpost', methods=['POST'])
 @jwt_required()
 def createPost():
@@ -210,8 +190,31 @@ def protected():
     }
     return jsonify(response_body),200
     
+@api.route('/edit_user', methods=[ 'PUT'])
+@jwt_required()
+def edit_user():
+    current_user_id = get_jwt_identity()
+    user = User.query.get(current_user_id)
 
+    if user is None:
+        return jsonify({"msg":"user does not exist"}), 404
 
+    # Update user fields based on the JSON data (assuming JSON payload)
+    data = request.get_json()
+    user.first_name = data.get('first_name')
+    user.last_name = data.get('last_name')
+    user.biography = data.get('biography')
+    user.perm_location = data.get('perm_location')
+    # user.places_visited = data.get('places_visited')
+    # user.wishlist_places = data.get('wishlist_places')
+
+    # Update other fields as needed
+    db.session.commit()
+    user = User.query.get(current_user_id)
+    response_body = {
+        "msg": "Success!", "user":user.serialize()
+    }
+    return jsonify(response_body),200
 
 
 
