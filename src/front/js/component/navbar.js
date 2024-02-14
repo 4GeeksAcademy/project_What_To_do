@@ -12,20 +12,13 @@ export const Navbar = () => {
 	const { store, actions } = useContext(Context);
 	return (
 
-        // <nav class="navbar bg-body-tertiary">
-        //     <div class="container-fluid">
-        //         <a class="navbar-brand">Navbar</a>
-        //         <form class="d-flex" role="search">
-        //         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        //         <button class="btn btn-outline-success" type="submit">Search</button>
-        //         </form>
-        //     </div>
-
 		<nav className="navbar navbar-light bg-light border-bottom">
 			<div className="container-fluid">
                 <div className="d-flex">
-                    <Link to="/">
-                           <h3>What to Do</h3>
+                    <Link to="/" className="navbar-brand">
+                        <img src="/workspaces/project_What_To_do/public/rigo-baby.jpg" alt="app logo" ></img>
+                        <h3>TOURISTNAUTA</h3>
+                           {/* <h3>What to Do</h3> */}
                     </Link>
 
                     {!sessionStorage.getItem("token")? 

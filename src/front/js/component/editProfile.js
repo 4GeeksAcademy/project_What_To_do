@@ -99,6 +99,7 @@ const EditProfile = ({user}) => {
                             type="button" 
                             className="btn btn-primary"
                             onClick={handleSubmit}
+                            data-bs-dismiss="modal"
                         >
                             Save changes
                         </button>

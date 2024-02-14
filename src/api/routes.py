@@ -207,8 +207,9 @@ def edit_user():
     user.perm_location = data.get('perm_location')
     # user.places_visited = data.get('places_visited')
     # user.wishlist_places = data.get('wishlist_places')
-
     # Update other fields as needed
+
+    
     db.session.commit()
     user = User.query.get(current_user_id)
     response_body = {
