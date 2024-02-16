@@ -78,7 +78,7 @@ export const Activity = () => {
                             <div className="carousel-inner">
                                 {photosURL.map((item, index) => (
                                     <div key={index} className={`carousel-item ${index === 0 ? 'active' : ''}`}>
-                                        <img src={`${item.prefix}800x400${item.suffix}`} className="d-block w-40" alt="" />
+                                        <img src={`${item.prefix}900x400${item.suffix}`} className="d-block w-40" alt="" />
                                     </div>
                                 ))}
                             </div>
