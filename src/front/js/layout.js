@@ -18,7 +18,7 @@ import Profile from "./pages/profile.jsx";
 import ForgotPassword from "./pages/ForgotPassword.jsx";
 import ResetPassword from "./pages/ResetPassword.jsx";
 import ValidateResetPassword from "./pages/ValidateResetPassword.jsx";
-
+import { Activity } from "./pages/Activity.js";
 
 //create your first component
 const Layout = () => {
@@ -43,6 +43,7 @@ const Layout = () => {
                         <Route element={<ResetPassword />} path="/resetpassword" />
                         <Route element={<ValidateResetPassword />} path="/validateresetpassword/:token" /> 
                         <Route element={<Single />} path="/single/:theid" />
+                        <Route element={<Activity />} path="/activity/:id" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                     <Footer />
