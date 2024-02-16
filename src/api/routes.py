@@ -387,7 +387,7 @@ def send_link():
 
     email = request.get_json()["email"]
     token = create_access_token(identity=email)  
-    send_email(f"https://automatic-zebra-66qj6qjrxr4frqqg-3000.app.github.dev/validateresetpassword/{token}", email)
+    send_email(f"https://bug-free-succotash-r4rjprwpj96f5j76-3000.app.github.dev/validateresetpassword/{token}", email)
 
     return jsonify(email), 200
 

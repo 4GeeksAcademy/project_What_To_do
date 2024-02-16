@@ -6,6 +6,10 @@ import { Context } from "../store/appContext";
 import { useContext} from "react";
 // import  "../component/styles.css";
 
+// const navStyle = {
+// 	'background-color':'#537780'
+// }
+
 // "Link" paths just written are just for reference, should be changed later
 export const Navbar = () => {
     const navigate = useNavigate();
@@ -51,7 +55,7 @@ export const Navbar = () => {
                             data-bs-toggle="dropdown" 
                             aria-expanded="false"
                         >
-                            What to Do!!
+                            TOURISTNAUTA!!
                         </button>
                         <ul className="dropdown-menu">
                             <ol> 

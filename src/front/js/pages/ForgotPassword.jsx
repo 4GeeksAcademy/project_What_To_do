@@ -11,7 +11,7 @@ import '../component/styles.css';
 
       const handleForgotPassword = async () => {
         try {
-          const response = await fetch(`${process.env.BACKEND_URL}/api/forgotpassword`, {
+          const response = await fetch(`${process.env.BACKEND_URL}api/forgotpassword`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -26,7 +26,7 @@ import '../component/styles.css';
             setAlertType('success');
             setTimeout(() => {
               navigate('/login');
-            }, 200);
+            }, 1000);
           } else {
             setAlertMessage('Failed to send reset link, please verify your email address is correct.');
             setAlertType('danger');

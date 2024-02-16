@@ -5,7 +5,12 @@ import { Carousel } from "../component/carrusel";
 
 //Back ground style for activities
 const myStyle = {
-	'background-color':'#e3f2fd'
+	'background-color':'#bff8d4'
+}
+
+//Back ground for container 1
+const containerStyle = {
+	"background": "linear-gradient(to top, #fff1eb 0%, #a0b7c5 100%)"
 }
 
 export const LandingPage = () => {
@@ -13,12 +18,15 @@ export const LandingPage = () => {
 
 	return (
 		<div>
-			<div className="container p-3 mb-2 my-4 border border-2 rounded">
+			<div className="container p-3 mb-2 my-4 border border-2 rounded" style={containerStyle}>
 				<div className="jumbotron m-5">
-					<h1 className="display-4">WELCOME TO WHAT TO DO</h1>
+					<h1 className="display-4">WELCOME TO TOURISTNAUTA</h1>
 					<p className="lead text-break">
-						The app that is going to help you to find a lot of amazing activities near you!!
-						Here should be long paragraph to describe why you should use this and how amazing we are 
+						<strong>
+							The app that is going to help you to discover what's fun!
+						</strong>!<br></br>
+						Do not just be another turist in town. Go to places where the locals connect 
+						and have fun. Be part of the essence everywhere you go 
 					</p>
 					<p> 
 						Your current location is : SET location				
